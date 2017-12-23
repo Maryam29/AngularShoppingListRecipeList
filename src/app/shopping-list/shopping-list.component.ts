@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Ingredient } from '../shared/ingredient.model'
+import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
@@ -7,14 +8,15 @@ import { Ingredient } from '../shared/ingredient.model'
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit {
- ingredients:Ingredient[] = [new Ingredient('Ginger Garlic Paste',200),new Ingredient('Tomatoes',100),new Ingredient('Green Chillies',200)];
+ ingredients:Ingredient[] = [];
  
-  constructor() { }
+  constructor(private ShoppingListService:ShoppingListService) { }
 
-  ngOnInit() {
+ngOnInit() {
+  this.ingredients = this.ShoppingListService.getIngredients(); // Here we are getting copy of Ing. hence its not updated when Ing list is updated. Therefore we use push notifications in service
+  
+   this.ShoppingListService.ingredientsChanged.subscribe((ingredients:Ingredient[]) => {
+   this.ingredients = ingredients;
+  })
   }
-  AddIngtoList(IngData:Ingredient){
-  this.ingredients.push(IngData);
-  }
-
 }
