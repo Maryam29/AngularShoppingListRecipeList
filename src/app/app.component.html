@@ -1,10 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-header (onFeatureSelect)="ShowFeature($event)"></app-header>
+<app-header></app-header>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <app-recipes *ngIf="isRecipe"></app-recipes>
-            <app-shopping-list *ngIf="!isRecipe"></app-shopping-list>
+            <router-outlet></router-outlet>
+            <!--<app-recipes *ngIf="isRecipe"></app-recipes>
+            <app-shopping-list *ngIf="!isRecipe"></app-shopping-list>-->
         </div>
     </div>
 </div>
