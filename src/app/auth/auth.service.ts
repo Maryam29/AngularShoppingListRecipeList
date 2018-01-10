@@ -10,6 +10,13 @@ export class AuthService {
     signupUser(email:string, password:string)
     {
      firebase.auth().createUserWithEmailAndPassword(email, password)
+     .then((response) => firebase.auth().currentUser.getIdToken()
+     .then(
+     (token) => 
+     {
+     this.token = token;
+     this.router.navigate(['/']);
+     }))
      .catch(
         error => console.log(error);
         )
@@ -22,8 +29,11 @@ export class AuthService {
         (response) => 
         {
         console.log(response);
-        firebase.auth().currentUser.getIdToken().then((token) => {this.token = token;});
-        this.router.navigate(['/'])
+        firebase.auth().currentUser.getIdToken().then((token) => {
+        this.token = token;
+        this.router.navigate(['/']);
+        });
+        
         }
         )
      .catch(
@@ -45,5 +55,9 @@ export class AuthService {
     
     logout(){
     this.token = null;
+    }
+    
+    setToken(token:string){
+    this.token = token;
     }
 }
