@@ -14,7 +14,7 @@ export class RecipeEditComponent implements OnInit {
   editMode = false;
   recipeEditForm : FormGroup;
   
-  constructor(private route: ActivatedRoute, private RecipesService: RecipesService,, private router:Router) { }
+  constructor(private route: ActivatedRoute, private RecipesService: RecipesService, private router:Router) { }
 
   ngOnInit() {
   this.route.params.subscribe((params: Params) => {
@@ -33,6 +33,7 @@ export class RecipeEditComponent implements OnInit {
    
    if(this.editMode){
     let recipe = this.RecipesService.getRecipeById(this.id);
+    console.log(recipe);
     recipeName = recipe.name;
     recipeImagePath = recipe.imagePath;
     recipeDescription = recipe.description;

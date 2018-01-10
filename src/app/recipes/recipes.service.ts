@@ -26,6 +26,14 @@ private recipes: Recipe[] = [
     ])
   ];
   
+  setRecipes(recipes: Recipe[]){
+  if(recipes !== null){
+    this.recipes = recipes;
+    this.recipeChanged.next(this.recipes.slice());
+  }
+    
+  }
+  
   getRecipes(){
   return this.recipes.slice();// .slice() pass object by value not by reference, else anyone could change the value of array.
   }

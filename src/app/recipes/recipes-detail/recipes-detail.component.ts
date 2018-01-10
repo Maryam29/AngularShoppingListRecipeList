@@ -29,7 +29,7 @@ export class RecipesDetailComponent implements OnInit {
   }
   
   AddtoShoppingList(){
-   //console.log(this.recipe);
+   console.log("Shopping List",this.recipe.ingredients);
   this.RecipesService.AddIngstoShoppingList(this.recipe.ingredients);
  
   }
