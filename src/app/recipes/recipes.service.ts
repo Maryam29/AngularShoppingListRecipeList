@@ -43,7 +43,7 @@ private recipes: Recipe[] = [
   }
   
   AddRecipe(recipe:Recipe){
-  this.recipes.push(recipe));
+  this.recipes.push(recipe);
   this.recipeChanged.next(this.recipes.slice());
   }
   

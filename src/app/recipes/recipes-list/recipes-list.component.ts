@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-//import { Recipe } from '../recipe.model';
+import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription} from 'rxjs/Subscription'
@@ -12,7 +12,7 @@ import { Subscription} from 'rxjs/Subscription'
 export class RecipesListComponent implements OnInit {
   recipes: Recipe[] : [];
   subscription :  Subscription;
- constructor(private RecipesService: RecipesService,private route: ActivatedRoute, private router:Router) { };
+  constructor(private RecipesService: RecipesService,private route: ActivatedRoute, private router:Router) { };
 
   ngOnInit() {
   this.recipes = this.RecipesService.getRecipes();

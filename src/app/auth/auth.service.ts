@@ -18,7 +18,7 @@ export class AuthService {
      this.router.navigate(['/']);
      }))
      .catch(
-        error => console.log(error);
+        error => console.log(error)
         )
     } // returns a promise
     
