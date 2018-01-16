@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router, Params} from '@angular/router';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { RecipesService } from '../recipes.service';
 import { Recipe } from '../recipe.model';
@@ -33,7 +33,7 @@ export class RecipeEditComponent implements OnInit {
    
    if(this.editMode){
     let recipe = this.RecipesService.getRecipeById(this.id);
-    console.log(recipe);
+    //console.log(recipe);
     recipeName = recipe.name;
     recipeImagePath = recipe.imagePath;
     recipeDescription = recipe.description;
@@ -88,4 +88,9 @@ export class RecipeEditComponent implements OnInit {
   OnCancelIng(index:number){
     (<FormArray>this.recipeEditForm.get('ingredients')).removeAt(index);
   };
+  
+  getControls(){
+   return (<FormArray>this.recipeEditForm.get('ingredients')).controls;
+  }
+ 
 }

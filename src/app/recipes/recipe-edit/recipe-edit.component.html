@@ -33,7 +33,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12" formArrayName = "ingredients">
-                    <div class="row"  *ngFor="let ing of recipeEditForm.get('ingredients').controls; let i= index" [formGroupName]="i">
+                    <div class="row"  *ngFor="let ing of getControls(); let i= index" [formGroupName]="i">
                         <div class="col-md-8 form-group"> <!-- *ngFor="let ing of recipeEditForm.get('ingredients').controls; let i= index"-->
                             <input type="text" class="form-control" formControlName="name">
                             <!--<span *ngIf="!recipeEditForm.get('i.name').valid && recipeEditForm.get('i.name').touched"class="help-block"> Ingredient's Description is required</span>-->

@@ -10,8 +10,8 @@ import { Subscription} from 'rxjs/Subscription'
   styleUrls: ['./recipes-list.component.css']
 })
 export class RecipesListComponent implements OnInit {
-  recipes: Recipe[] : [];
-  subscription :  Subscription;
+  recipes: Recipe[] = [];
+  subscription : Subscription;
   constructor(private RecipesService: RecipesService,private route: ActivatedRoute, private router:Router) { };
 
   ngOnInit() {

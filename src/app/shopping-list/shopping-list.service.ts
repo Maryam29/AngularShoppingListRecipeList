@@ -2,28 +2,23 @@ import { OnInit} from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs/Subject';
 
-export class ShoppingListService implements OnInit {
+export class ShoppingListService{
 //ingredientsChanged = new EventEmitter<Ingredient>();
-ingredientsChanged = new Subject<Ingredient>();
+ingredientsChanged = new Subject<Ingredient[]>();
 EditIngredient = new Subject<number>();
 
-private ingredients:Ingredient[] = [new Ingredient('Ginger Garlic Paste',200),new Ingredient('Tomatoes',100),new Ingredient('Green Chillies',200)];
+  private ingredients : Ingredient[] = [new Ingredient('Ginger Garlic Paste',200)];
   
   getIngredients(){
   return this.ingredients.slice();
   }
   
-  getIngredientbyIndex(index){
-  console.log(index);
+  getIngredientbyIndex(index:number){
   return this.ingredients[index];
   }
   AddIngtoList(IngData:Ingredient){
   this.ingredients.push(IngData);
   this.ingredientsChanged.next(this.ingredients.slice());
-  }
-  
-  DeleteIngtoList(IngData:Ingredient){
-  this.ingredients.slice(IngData,1);
   }
   
   AddIngstoList(IngData:Ingredient[]){
@@ -36,7 +31,7 @@ private ingredients:Ingredient[] = [new Ingredient('Ginger Garlic Paste',200),ne
   this.ingredientsChanged.next(this.ingredients.slice());
   }
   
-  deleteIngredient(index:number, newIngredient:Ingredient){
+  deleteIngredient(index:number){
   this.ingredients.splice(index,1);
   this.ingredientsChanged.next(this.ingredients.slice());
   }

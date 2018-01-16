@@ -13,8 +13,8 @@ export class DataStorageService{
   saveRecipes(){
   const token = this.authService.getToken();
   return this.http.put('https://udemy-shopping-recipe-project.firebaseio.com/recipes.json?auth='+ token,this.RecipesService.getRecipes()).subscribe(
-  (data:Response[]) => {},
-  (error:Response[]) => console.log(error)
+  (data:Response) => {},
+  (error:Response) => console.log(error)
   );
   }
   
@@ -24,7 +24,7 @@ const token = this.authService.getToken();
   return this.http.get('https://udemy-shopping-recipe-project.firebaseio.com/recipes.json?auth='+ token)
   .map(
   (data:Response) => {
-    const recipes: Recipe [] = data.json();
+    let recipes: Recipe [] = data.json();
     if(recipes === null)
         recipes = [];
     for(let recipe of recipes){
