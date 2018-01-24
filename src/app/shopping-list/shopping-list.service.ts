@@ -16,6 +16,7 @@ EditIngredient = new Subject<number>();
   getIngredientbyIndex(index:number){
   return this.ingredients[index];
   }
+  
   AddIngtoList(IngData:Ingredient){
   this.ingredients.push(IngData);
   this.ingredientsChanged.next(this.ingredients.slice());
