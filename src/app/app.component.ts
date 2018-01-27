@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { AuthService } from './auth/auth.service';
+import { Store } from '@ngrx/store';
+import * as AuthActions from './auth/store/auth.actions';
+import * as fromApp from './store/app.reducers';
+
 
 @Component({
   selector: 'app-root',
@@ -12,7 +15,7 @@ export class AppComponent implements OnInit{
   loadedFeature = 'recipe';
   isRecipe = true;
   
-  constructor(private authService: AuthService){}
+  constructor(private store: Store<fromApp.AppState>){}
   
   ngOnInit(){
   firebase.initializeApp({
@@ -23,7 +26,10 @@ export class AppComponent implements OnInit{
     firebase.auth().onAuthStateChanged(user => {
     if (user) {
       user.getIdToken().then(
-        (token: string) => this.authService.setToken(token)
+        (token: string) => 
+        {
+        this.store.dispatch(new AuthActions.SetToken(token))
+        }
       );
     }
   });

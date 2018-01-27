@@ -1,34 +1,29 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from './shopping-list.service';
-import { Subscription} from 'rxjs/Subscription';
-import { Subject} from 'rxjs/Subject';
+
+import * as ShoppingListActions from './store/shopping-list.actions';
+import * as fromApp from '../store/app.reducers';
+
+import { Observable} from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
-export class ShoppingListComponent implements OnInit, OnDestroy {
- ingredients:Ingredient[] = [];
- private subscription:Subscription;
+export class ShoppingListComponent implements OnInit {
+ shoppingListState : Observable<{ingredients: Ingredient[]}>;
  
- constructor(private ShoppingListService:ShoppingListService) { }
+ constructor(private store : Store<fromApp.AppState>) { }
 
  ngOnInit() {
-  this.ingredients = this.ShoppingListService.getIngredients(); // Here we are getting copy of Ing. hence its not updated when Ing list is updated. Therefore we use push notifications in service
-  
-   this.subscription = this.ShoppingListService.ingredientsChanged.subscribe((ingredients:Ingredient[]) => {
-   this.ingredients = ingredients;
-  });
+    this.shoppingListState = this.store.select('shoppingList');
+    //console.log(this.shoppingListState);
   }
   
-  EditSelectedItem(i:number){
-  //console.log(i);
-    this.ShoppingListService.EditIngredient.next(i);
+  EditSelectedItem(index:number){
+    this.store.dispatch(new ShoppingListActions.StartEdit(index));
   }
   
-  ngOnDestroy(){
-  this.subscription.unsubscribe(); // this is imp to unsuscribe to avoid memory leaks
-  }
 }
